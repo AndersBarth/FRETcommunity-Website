@@ -6,7 +6,7 @@ This document describes how the community website is set-up and managed. The web
 We chose to use a self-hosted WordPress website for the FRET community. Currently (11/2019), this website is hosted at HHU Düsseldorf, Germany, and the hosting infrastructure is in responsibility of Mathias Fröscher. The domain of the website is  currently www.fret.community, which redirects to https://www3.hhu.de/fluorescence-science/.
 FTP access to the server is available under the address sftp://mpcwww@www2.hhu.de e.g. through the app FileZilla. Inquire to Mathias Fröscher for the password. Use the FTP to edit code in the WordPress installation or to manually install plugins.
 #### DNS redirect
-To change the displayed URL from h"www3.hhu.de/fluorescence-science/" to "fret.community", the Site URL under Settings->General has to be changed to "http://fret.community". For some reason, this breaks the Customizer used to edit the front page of the theme Materialis, so remember to change it back to be able to modify the front page.
+To change the displayed URL from h"www3.hhu.de/fluorescence-science/" to "https://www.fret.community", the Wordpress AND Site-URL under Settings->General has to be changed to "https://www.fret.community".
 ### WordPress theme
 We have chosen the theme "Materialis" for the website as it offers a modern and customizable look. In principle, the theme can be changed at any time, although there are some important code additions in the `functions.php` file that need to be copied over to the new theme. Most of the design was done in the "Customizer" and is pretty self-explanatory. Some custom CSS code has been added related to the formatting of some text passages, found at Customizer->General->Additional CSS.
 ### Pages and Posts
