@@ -11,6 +11,25 @@ To change the displayed URL from h"www3.hhu.de/fluorescence-science/" to "https:
 We have chosen the theme "Materialis" for the website as it offers a modern and customizable look. In principle, the theme can be changed at any time, although there are some important code additions in the `functions.php` file that need to be copied over to the new theme. Most of the design was done in the "Customizer" and is pretty self-explanatory. Some custom CSS code has been added related to the formatting of some text passages, found at Customizer->General->Additional CSS.
 ### Pages and Posts
 WordPress offers two types of sites, pages and posts. Pages are used for permanent sites, such as the homepage, software list etc. Posts are handled as "news" in the website and will be listed on the homepage and the separate "News" page. Use posts for announcements, updates, or small articles. Posts can additionally be assigned to categories that describe the content.
+### Errors...
+Using the Materialis theme, there occured an error related to the JavaScript version used by Wordpress and the Masonry JavaScript package that arranges boxes/windwos (such as posts or images). I tried to figure out what the error was and ended up just suppressing it by catching it and exiting the function. The error was that sometimes a window was passed to the function `jquery.masonry.min.js` found in `/wp_includes/js/jquery/`that did not contain a `Masonry` attribute (of which erroneously properties were requested afterwards, leading to the error). The code of the first lines was originally:
+
+```
+! function (a) {
+    "use strict";
+    var b = a.Masonry;
+    b.prototype._remapV2Options = function () {
+```
+
+To catch the case that `b` is undefined, the following check was added after the declaration of `var b = a.Masonry;`:
+
+```
+    if (typeof b == 'undefined') {
+        return;
+    };
+```
+This "fixed" the error (well, at least it suppresses the warning in the front end).
+
 ## Membership management
 ### Ultimate Member (UM) plugin
 For the registration and listing of member, we used the plugin "Ultimate Member", which offered most of the functionality we required.
