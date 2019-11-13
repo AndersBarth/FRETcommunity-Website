@@ -43,6 +43,8 @@ UM allows the user to modify their basic profile information on the website, suc
 To display custom meta fields in the profile, they have to be added in the profile form in UM. In the bottom right, you will have the option to add custom meta fields.
 ### Displaying a member directory
 UM offers an internal way to display an overview of the community members in a grid with only the basic information. It was requested that instead the members be given in a list with affiliation and career status displayed. After much search, we found the "Dynamic User Directory" plugin which provided exactly what we needed. There exists a paid extension to this plugin which would allow smart filtering of users based on meta fields. For the future, this might be worth considering.
+#### Update: 11/2019
+The UM plugin now also displays a list view by default. Filtering by custom meta data also works by default, so in essence the "Dynamic User Directory" is not needed anymore. Custom filters are displayed as dropdown menus, whereby the default data placeholder is used to label the dropdown. This field is based on the "label" attribute of the field in the database, which has to be set in the registration form.
 ### Accessing user meta data in the backend
 Custom user meta data is, by default, not accessible in the UM backend. Two plugins are used: "User Meta Display" to display and modify the user meta data for individual users, and "Export User Data" to export the data as excel or csv sheet for all users. In addition, through some code modifications in the `functions.php` file, it is possible to add the user meta data to the user table (Users->All Users). See the associated file for the additions that have to be performed.
 ### Issues with custom user meta data
