@@ -111,7 +111,11 @@ function mysite_custom_columns($value, $column_name, $id) {
         $meta_number++;
         if ($column_name == ('mysite-usercolumn-'.$meta_number.
                 '')) {
-            return get_the_author_meta($meta_field_name, $id);
+            $value = get_the_author_meta($meta_field_name, $id);
+            if (is_array($value)){
+                $value = $value[0];
+            }
+            return $value;
         }
     }
 }
