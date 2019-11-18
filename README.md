@@ -12,7 +12,7 @@ We have chosen the theme "Materialis" for the website as it offers a modern and 
 ### Pages and Posts
 WordPress offers two types of sites, pages and posts. Pages are used for permanent sites, such as the homepage, software list etc. Posts are handled as "news" in the website and will be listed on the homepage and the separate "News" page. Use posts for announcements, updates, or small articles. Posts can additionally be assigned to categories that describe the content.
 ### Wrapping text around images
-Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate `<div>.)
+Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate div section in html.)
 ### Errors...
 Using the Materialis theme, there occured an error related to the JavaScript version used by Wordpress and the Masonry JavaScript package that arranges boxes/windwos (such as posts or images). I tried to figure out what the error was and ended up just suppressing it by catching it and exiting the function. The error was that sometimes a window was passed to the function `jquery.masonry.min.js` found in `/wp_includes/js/jquery/`that did not contain a `Masonry` attribute (of which erroneously properties were requested afterwards, leading to the error). The code of the first lines was originally:
 
