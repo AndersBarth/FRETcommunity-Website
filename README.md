@@ -14,7 +14,7 @@ WordPress offers two types of sites, pages and posts. Pages are used for permane
 ### Wrapping text around images
 Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate div section in html.)
 ### Removing Copyright from Wordpress and Theme
-To remove the text "Built using Wordpress and the Materialis theme" use the theme editor in wpadmin (Appearance -> Theme Editor). The text is found in "pro/inc/general-options.php". Just remove the corresponding text. Line 44 should then read `$defaultText = __('&copy; {year} {blogname}</a>.', 'materialis');`. The same code is found in footer-options.php on line 181. (In the non-pro version, this code was in "inc/template-functions.php".)
+To remove the text "Built using Wordpress and the Materialis theme" use the theme editor in wpadmin (Appearance -> Theme Editor). The text is found in "pro/inc/general-options.php". Just remove the corresponding text. Line 44 should then read `$defaultText = __('&copy; {year} {blogname}.</a>', 'materialis');`. The same code is found in footer-options.php on line 181. (In the non-pro version, this code was in "inc/template-functions.php".)
 ### Text wrapping around images
 Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate div section in html.)
 ### Errors...
