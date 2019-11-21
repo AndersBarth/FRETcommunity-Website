@@ -13,6 +13,10 @@ We have chosen the theme "Materialis" for the website as it offers a modern and 
 WordPress offers two types of sites, pages and posts. Pages are used for permanent sites, such as the homepage, software list etc. Posts are handled as "news" in the website and will be listed on the homepage and the separate "News" page. Use posts for announcements, updates, or small articles. Posts can additionally be assigned to categories that describe the content.
 ### Wrapping text around images
 Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate div section in html.)
+### Removing Copyright from Wordpress and Theme
+To remove the text "Built using Wordpress and the Materialis theme" use the theme editor in wpadmin (Appearance -> Theme Editor). The text is found in "pro/inc/general-options.php". Just remove the corresponding text. Line 44 should then read `$defaultText = __('&copy; {year} {blogname}</a>.', 'materialis');`. (In the non-pro version, this code was in "inc/template-functions.php".)
+### Text wrapping around images
+Inline images only work if you use the "classic" block in the wordpress editor, found under "Formatting -> Classic" when inserting a new content block. (Support should also be there for the normal blocks, but this results in the image being placed above the text in a separate div section in html.)
 ### Errors...
 Using the Materialis theme, there occured an error related to the JavaScript version used by Wordpress and the Masonry JavaScript package that arranges boxes/windwos (such as posts or images). I tried to figure out what the error was and ended up just suppressing it by catching it and exiting the function. The error was that sometimes a window was passed to the function `jquery.masonry.min.js` found in `/wp_includes/js/jquery/`that did not contain a `Masonry` attribute (of which erroneously properties were requested afterwards, leading to the error). The code of the first lines was originally:
 
