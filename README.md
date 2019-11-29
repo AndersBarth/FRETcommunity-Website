@@ -255,7 +255,7 @@ The values for formName, fieldNameRoot, vote_count and maxvote have to be specif
 
 ```
 function my_validate_duplicate_selection_general($result, $tag) {
-    $formName = 'Voting'; // Change to name of the form containing this field
+    	$formName = 'Voting'; // Change to name of the form containing this field
 	$vote_count = 2; // The number of votes, i.e. the number drop-down menus.
 	$maxvote = 2; // The maximum number of votes per person
 	
@@ -275,7 +275,7 @@ function my_validate_duplicate_selection_general($result, $tag) {
 			$fieldNameRoot = 'vote_other'; 
 			break;
 	}
-    $errorMessage = '';
+        $errorMessage = '';
 	
 	$votes = array();
 	for ($i = 1; $i <= $vote_count; $i++){
@@ -291,12 +291,12 @@ function my_validate_duplicate_selection_general($result, $tag) {
 	}	
 
 	$name = $tag['name'];
-    if ($name == $fieldNameRoot . $vote_count) {
-        if ($invalid) {
-			$result->invalidate($tag, $errorMessage);
+        if ($name == $fieldNameRoot . $vote_count) {
+            if ($invalid) {
+	        $result->invalidate($tag, $errorMessage);
+            }
         }
-    }
-    return $result;
+        return $result;
 }
 
 add_filter('wpcf7_validate_select*', 'my_validate_duplicate_selection_general', 10, 2);
