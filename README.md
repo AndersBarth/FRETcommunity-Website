@@ -249,3 +249,39 @@ function my_validate_email($result, $tag) {
  
 add_filter('wpcf7_validate_text*', 'my_validate_email', 10, 2);
 ```
+## Custom filter code to limit the number of votes per candidate
+
+The values for formName, fieldNameRoot, vote_count and maxvote have to be specified for every form.
+```
+function my_validate_duplicate_selection_general($result, $tag) {
+    $formName = 'Voting'; // Change to name of the form containing this field
+    $fieldNameRoot = 'vote'; // Change to your form's unique field name
+    $vote_count = 2; // The number of votes, i.e. the number drop-down menus.
+    $maxvote = 2; // The maximum number of votes per person
+    $errorMessage = '';
+	
+	$votes = array();
+	for ($i = 1; $i <= $vote_count; $i++){
+		$fieldName = $fieldNameRoot . $i;
+		$votes[$_POST[$fieldName]] += 1;
+	}
+	$invalid = false;
+	$maximum_votes_per_person = max($votes);
+	if ($maximum_votes_per_person >= $maxvote) {
+		$invalid = true;
+		$person = array_search($maximum_votes_per_person,$votes); // returns person with most votes
+		$errorMessage = 'The maximum allowed number of votes per person is ' . $maxvote . '. You voted ' . $maximum_votes_per_person . ' times for ' . $person . '.'; // Change to your error message
+	}	
+	
+	$name = $tag['name'];
+    if ($name == 'vote' . $vote_count) {
+        if ($invalid) {
+			$result->invalidate($tag, $errorMessage);
+        }
+    }
+    return $result;
+}
+
+add_filter('wpcf7_validate_select*', 'my_validate_duplicate_selection_general', 10, 2);
+
+```
