@@ -255,48 +255,55 @@ The values for formName, fieldNameRoot, vote_count and maxvote have to be specif
 
 ```
 function my_validate_duplicate_selection_general($result, $tag) {
-    	$formName = 'Voting'; // Change to name of the form containing this field
-	$vote_count = 2; // The number of votes, i.e. the number drop-down menus.
+    $formName = 'Voting'; // Change to name of the form containing this field	
 	$maxvote = 2; // The maximum number of votes per person
 	
 	// Change fieldNameRoot to the user roles field label
 	$career_status = $_POST['user-careerstatus'];
+
 	switch ($career_status) {
 		case 'Early stage researcher':
-			$fieldNameRoot = 'vote_early'; 
+			$fieldNameRoot = 'vote_early';
+			$vote_count = 4; // The number of votes, i.e. the number drop-down menus.
 			break;
 		case 'Young investigator':
-			$fieldNameRoot = 'vote_YI'; 
+			$fieldNameRoot = 'vote_YI';
+			$vote_count = 2; // The number of votes, i.e. the number drop-down menus.
 			break;
 		case 'Senior researcher':
 			$fieldNameRoot = 'vote_senior'; 
+			$vote_count = 8; // The number of votes, i.e. the number drop-down menus.
 			break;
 		case 'Industry, instrument facilities, editors or other':
 			$fieldNameRoot = 'vote_other'; 
+			$vote_count = 2; // The number of votes, i.e. the number drop-down menus.
 			break;
 	}
-        $errorMessage = '';
+    $errorMessage = '';
 	
 	$votes = array();
 	for ($i = 1; $i <= $vote_count; $i++){
 		$fieldName = $fieldNameRoot . $i;
-		$votes[$_POST[$fieldName]] += 1;
+		if ($_POST[$fieldName] != "") { // if field is not empty (i.e. value was not changed)
+			$votes[$_POST[$fieldName]] += 1;
+		}
 	}
 	$invalid = false;
 	$maximum_votes_per_person = max($votes);
-	if ($maximum_votes_per_person >= $maxvote) {
+	if ($maximum_votes_per_person > $maxvote) {
 		$invalid = true;
 		$person = array_search($maximum_votes_per_person,$votes); // returns person with most votes
 		$errorMessage = 'The maximum allowed number of votes per person is ' . $maxvote . '. You voted ' . $maximum_votes_per_person . ' times for ' . $person . '.'; // Change to your error message
 	}	
-
+	
 	$name = $tag['name'];
-        if ($name == $fieldNameRoot . $vote_count) {
-            if ($invalid) {
-	        $result->invalidate($tag, $errorMessage);
-            }
+    if ($name == $fieldNameRoot . $vote_count) {
+        if ($invalid) {
+			$result->invalidate($tag, $errorMessage);
         }
-        return $result;
+    }
+    return $result;
 }
 
-add_filter('wpcf7_validate_select*', 'my_validate_duplicate_selection_general', 10, 2);
+add_filter('wpcf7_validate_select', 'my_validate_duplicate_selection_general', 10, 2);
+```
